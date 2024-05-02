@@ -1,0 +1,131 @@
+<style>
+  /* Estilos para os modais */
+  .modal {
+    display: none; /* Ocultar por padrão */
+    position: fixed; /* Posição fixa */
+    z-index: 1; /* Coloca o modal na parte superior */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Adiciona rolagem se necessário */
+    background-color: rgba(0,0,0,0.4); /* Fundo preto com opacidade */
+  }
+
+  /* Estilos para o conteúdo do modal */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% do topo e centralizado */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largura do conteúdo */
+  }
+
+  /* Estilos para o botão fechar */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+
+
+<div class="container d-flex justify-content-center">
+  <p style="color: green"><%= notice %></p>
+  <div class="card p-4 mt-4" style="background-color: #EEF5FF; width: 25rem;">
+    <div class="d-flex w-100 h-100 justify-content-center align-items-center my-3">
+      <div class="m-auto">
+        <div class="card" style="width: 18rem;">
+          <img src="/assets/img_product.png" class="card-img-top mx-auto" alt="imagem do produto" style="width: 12rem; height: 12rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= @product.name %></h5>
+            <p class="card-text"><%= @product.description %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Preço: R$<%= number_with_precision(@product.price, precision: 2) %></li>
+            <li class="list-group-item">Status: 
+              <% if @product.status == 'active' %>
+                <span class="text-success border rounded border-success px-2 bg-success-subtle">Ativo</span>
+              <% else %>
+                <span class="text-danger border rounded border-danger px-2 bg-danger-subtle">Inativo</span>
+              <% end %>
+            </li>
+          </ul>
+          <div class="card-body text-center">
+            <%= link_to "Voltar", main_products_path, class: "btn btn-secondary ms-1" %>
+            <%= link_to "Editar", edit_main_product_path(@product), class: "btn btn-primary" %>
+
+            <% if @product.status === "active" %>
+              <button type="button" class="btn btn-danger me-1" onclick="showModal('confirmDeactivateModal')">Inativar</button>
+            <% else %>
+              <button type="button" class="btn btn-success me-1" onclick="showModal('confirmActivateModal')">Ativar</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para confirmação de desativação -->
+<!-- Modal para confirmação de desativação -->
+<div id="confirmDeactivateModal" class="modal" onclick="hideModal('confirmDeactivateModal')">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header" style="border: none;">
+        <h5 class="modal-title">Confirmar Desativação</h5>
+        <button type="button" class="close" onclick="hideModal('confirmDeactivateModal')" style="position: absolute; top: 10px; right: 10px; background-color: transparent; border: none;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Tem certeza que deseja desativar o produto?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="hideModal('confirmDeactivateModal')" style="margin-right: auto;">Cancelar</button>
+        <%= button_to 'Inativar Produto', deactivate_main_product_path(@product), method: :put, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para confirmação de ativação -->
+<div id="confirmActivateModal" class="modal" onclick="hideModal('confirmActivateModal')">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header" style="border: none;">
+        <h5 class="modal-title fs-3" style="margin: -10px">Confirmar Ativação</h5>
+        <button type="button" class="close" onclick="hideModal('confirmActivateModal')" style="position: absolute; top: 0px; right: 5px; background-color: transparent; border: none;">&times;</button>
+      </div>
+      <div class="modal-body text-center fs-6">
+        <p>Tem certeza que deseja ativar o produto?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="hideModal('confirmActivateModal')" style="margin-right: auto;">Cancelar</button>
+        <%= button_to 'Ativar Produto', activate_main_product_path(@product), method: :put, class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // Função para exibir o modal
+  function showModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "block";
+  }
+
+  // Função para ocultar o modal
+  function hideModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "none";
+  }
+</script>

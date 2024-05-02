@@ -1,0 +1,31 @@
+pt-BR:
+  hello: 'Olá, mundo!'
+  welcome: 'Bem-vindo ao aplicativo da Cantina RD!'
+
+  simple_form:   
+    yes: 'Sim'
+    no: 'Não'
+    required:
+      text: 'Campo obrigatório'
+    error_notification:
+      default_message: 'Por favor, verifique os erros abaixos: '  
+    
+  activerecord:
+    models:
+      product:
+        one: 'Produto'
+        other: 'Produtos'
+    attributes:
+      product:
+        name: 'Nome'
+        description: 'Descrição'
+        price: 'Preço'
+        status: 'Status'
+      customer:
+        name: 'Nome'
+        matriculation: 'Matrícula'
+      sale:
+        customer: 'Cliente'
+        total_price: 'Preço Total'
+        cart: 'Carrinho'
+

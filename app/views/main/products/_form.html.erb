@@ -1,0 +1,25 @@
+<div class="container mx-auto w-50">
+  <div class="card p-4 mt-4" style="background-color: #EEF5FF">
+  <%= simple_form_for [:main, @product] do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="form-inputs">
+      <%= f.input :name, as: :string, placeholder: 'Insira o nome do produto', required: true, autofocus: true, error: "Este campo deve ser preenchido" %>
+      <%= f.input :description, as: :string, required: true,  placeholder: 'Insira uma descrição do produto', error: "Este campo deve ser preenchido" %>
+      <div class="w-50">
+        <%= f.input :price, as: :decimal, placeholder:'00,00', required: true, error: "Este campo deve ser preenchido", input_html: { value: number_with_precision(f.object.price, precision: 2) }
+        %>
+      </div>
+
+      <%= f.input :status, as: :hidden, input_html: { value: "active" } %>
+
+    </div>
+
+    <div class="form-actions float-end">
+      <%= link_to "Voltar", main_products_path, class: "btn btn-secondary mt-3 ms-2" %>
+      <%= f.button :submit, "Enviar", class: "btn btn-primary mt-3" %>
+    </div>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container mx-auto w-50">
+  <div class="card p-4 mt-4" style="background-color: #EEF5FF">
+    <%= simple_form_for [:main, @customer] do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+      <div class="form-inputs">
+        <%= f.input :name, as: :string, placeholder: 'Insira o nome do cliente', required: true, autofocus: true, error: "Este campo deve ser preenchido" %>
+        <%= f.input :matriculation, placeholder: 'Insira o número de matrícula', error: "O número de matrícula é obrigatório" %>
+      </div>
+
+      <div class="form-actions float-end">
+        <%= link_to "Voltar", (request.referer.present? ? request.referer : main_customers_path), class: "btn btn-secondary mt-3 ms-2" %>
+        <%= f.button :submit, "Enviar", class: "btn btn-primary mt-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>

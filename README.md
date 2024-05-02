@@ -1,2 +1,24 @@
-# cantina-backup
-Repositório para guardar versão backup da cantina, versão antes do pdf, filtro de id em customer, e campo de customer em sales
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
