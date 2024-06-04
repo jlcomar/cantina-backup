@@ -1,6 +1,5 @@
 pt-BR:
   hello: 'Olá, mundo!'
-  welcome: 'Bem-vindo ao aplicativo da Cantina RD!'
 
   simple_form:   
     yes: 'Sim'
